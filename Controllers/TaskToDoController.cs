@@ -31,6 +31,47 @@ namespace ToDoMVC.Controllers
         }
 
         [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var task = _taskToDoRepository.GetById(id);
+
+            if(task == null)
+            {
+                return PartialView("_NotFound");
+            }
+
+            return View(task);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var task = _taskToDoRepository.GetById(id);
+
+            if(task == null) 
+            {
+                return PartialView("_NotFound");
+            }
+
+            return View(task);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        public IActionResult Edit(TaskToDo task, int id)
+        {
+            if(ModelState.IsValid)
+            {
+                if(id == task.Id)
+                {
+                    _taskToDoRepository.Update(task);
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return PartialView("_NotFound");
+        }
+
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var task = _taskToDoRepository.GetById(id);
