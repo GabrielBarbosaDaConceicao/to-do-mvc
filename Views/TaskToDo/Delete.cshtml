@@ -1,0 +1,20 @@
+﻿@model TaskToDo
+
+<form method="post">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-danger">Deseja mesmo excluir esta tarefa?</h2>
+                <hr />
+                <h1>@Model.Title</h1>
+                <p>@Model.Description</p>
+                <strong>@Model.Date</strong>
+            </div>
+            <div class="btn-todo">
+                <button type="submit" asp-action="Delete" asp-controller="TaskToDo" asp-route-id="@Model.Id" class="btn btn-danger">Excluir</button>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-warning">Cancelar</a>
+            </div>
+            <br>
+        </div>
+    </div>
+</form>

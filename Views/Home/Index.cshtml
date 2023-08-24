@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ToDoMVC.Models.TaskToDo>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="text-center">
+        <h1 class="display-4">Todas As Tarafas</h1>
+    </div>
+</div>
+
+<main class="to-dos">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Titulo</h3>
+                        <p>@item.Title</p>
+                        <h3>Descrição</h3>
+                        <p>@item.Description</p>
+                        <h3>Data de Criação</h3>
+                        <p>@item.Date.ToString("D")</p>
+                    </div>
+                    <div class="btn-todo">
+                        <a asp-action="Delete" asp-controller="TaskToDo" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
+                        <a asp-action="Update" asp-controller="TaskToDo" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        }
+    </div>
+</main>
+
